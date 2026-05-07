@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-pink-50 p-6">
+
+  <h1 class="text-xl font-bold text-green-800 mb-6">WINTER MELA 🎡❤️ Loot Lo</h1>
+
+
+  <div id="grid" class="grid  lg:grid-cols-5 gap-4"></div>
+
+<script>
+let products = [];
+
+// API call
+fetch("https://fakestoreapi.com/products?limit=15")
+  .then(pro => pro.json())
+  .then(data => {
+    products = data;
+    showProducts();
+  });
+
+// Cards show karne ka function
+function showProducts() {
+  let htmlfashion = "";
+
+  for (let item of products) {
+    htmlfashion += `
+      <div class="bg-gray-400 rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        
+        <img src="${item.image}" class="w-full h-36 object-contain p-2" />
+
+        <div class="p-3">
+          <p class="text-xs text-red-800 mb-1">${item.category}</p>
+
+          <p class="text-sm font-bold text-green-800 truncate">
+            ${item.title}
+          </p>
+
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-indigo-600">
+              $${item.price}
+            </span>
+
+            <span class="text-xs text-black-500">
+              ★ ${item.rating.rate}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  document.getElementById("grid").innerHTML = htmlfashion;
+}
+</script>
+
+</body>
+</html>
