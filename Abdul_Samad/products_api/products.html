@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <script>
+
+        let itemsData;
+
+        fetch("https://fakestoreapi.com/products?limit=15")
+
+            .then(response => {
+
+                if (!response.ok) {
+                    throw new Error("Data not found");
+                }
+
+                return response.json();
+
+            })
+
+            .then(result => {
+
+                console.log(result);
+
+                itemsData = result;
+
+                displayItems();
+
+            })
+
+            .catch(error => {
+
+                console.log(error.message);
+
+            });
+
+
+
+        function displayItems() {
+
+            let cards = "";
+
+            for (let item of itemsData) {
+
+                cards += `
+
+                <div class="bg-gray-500 rounded-2xl shadow-lg p-4 w-72">
+
+                    <img 
+                    src="${item.image}" 
+                    class="w-full h-52 object-contain">
+
+                    <p class="text-gray-200 text-sm mt-3">
+                        ${item.category}
+                    </p>
+
+                    <h2 class="font-bold text-lg mt-2">
+                        ${item.title}
+                    </h2>
+
+                    <p class="text-green-600 text-xl mt-3">
+                        $${item.price}
+                    </p>
+
+                    <p class="text-yellow-500 mt-2">
+                        ⭐ ${item.rating.rate}
+                    </p>
+
+                </div>
+
+                `;
+            }
+
+            document.getElementById("productArea").innerHTML = cards;
+
+        }
+
+    </script>
+
+</head>
+
+<body class="bg-gray-300 p-6">
+
+    <h1 class="text-5xl font-bold mb-10 ">
+        Product Store 
+    </h1>
+
+    <h2 class="text-yellow-200 text-4xl font-extrabold mb-10 tracking-wide">
+    Summer Sale 🔥
+</h2>
+    
+
+
+    <div id="productArea" class="grid lg:grid-cols-4 gap-5" ></div>
+
+</body>
+
+</html>
