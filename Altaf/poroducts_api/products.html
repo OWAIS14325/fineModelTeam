@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Product Store</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100 h-screen overflow-y-auto p-4">
+
+  <h1 class="text-3xl font-bold mb-4 text-gray-800">
+    Eid Offer...  Limited Offer
+  </h1>
+
+  <!-- Products Grid -->
+  <div id="showProducts" class="grid grid-cols-5 gap-2">
+  </div>
+
+  <script>
+
+    let products = [];
+
+    fetch("https://fakestoreapi.com/products?limit=30")
+
+      .then((res) => {
+
+        if (!res.ok) {
+          throw new Error("API Error");
+        }
+
+        return res.json();
+
+      })
+
+      .then((data) => {
+
+        console.log(data);
+
+        products = data;
+
+        showProducts();
+
+      })
+
+      .catch((err) => {
+
+        console.log(err);
+
+      });
+
+
+
+
+    function showProducts() {
+
+      let html = "";
+
+      for (let product of products) {
+
+        html += `
+
+        <div class="bg-indigo-200 rounded-xl shadow overflow-hidden  hover:scale-105 transition duration-300">
+
+          <img 
+            src="${product.image}" 
+            class="w-full h-16 object-contain p-2"
+          />
+
+          <div class="p-2">
+
+            <p class="text-[10px] text-black">
+              ${product.category}
+            </p>
+
+            <h2 class="text-[11px] font-medium text-gray-800 line-clamp-2 h-8 overflow-hidden">
+              ${product.title}
+            </h2>
+
+            <div class="flex items-center justify-between">
+
+              <p class="text-xs font-bold text-indigo-600">
+                $${product.price}
+              </p>
+
+              <p class="text-[10px] text-yellow-800 font-semibold">
+                ⭐ ${product.rating.rate}
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        `;
+      }
+
+      document.getElementById("showProducts").innerHTML = html;
+
+    }
+
+  </script>
+
+</body>
+
+</html>
