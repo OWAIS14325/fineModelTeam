@@ -42,13 +42,13 @@
     <div class="mb-8">
       <p class="mono text-red-400 text-xs tracking-widest mb-2">STUDENT 3 · NASA MARS API</p>
       <h1 class="text-3xl font-extrabold tracking-tight">Mars Rover Photos</h1>
-      <p class="text-gray-400 text-base mt-2">Curiosity Rover · Real images from the surface of Mars</p>
+      <p class="text-gray-400 text-base mt-2">Exploring the mysterious red planet through rover cameras</p>
     </div>
 
     <div class="flex gap-2 flex-wrap mb-6">
       <button data-camera="ALL"    class="filter-active mono text-sm px-4 py-2 rounded-full border transition-all">ALL</button>
-      <button data-camera="FHAZ"   class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">FHAZ</button>
-      <button data-camera="RHAZ"   class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">RHAZ</button>
+      <button data-camera="FHAZ"   class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">FRONT</button>
+      <button data-camera="RHAZ"   class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">REAR</button>
       <button data-camera="NAVCAM" class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">NAVCAM</button>
       <button data-camera="MAST"   class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">MAST</button>
     </div>
@@ -58,35 +58,43 @@
       <p class="mono text-sm text-red-400 tracking-widest">LOADING MARS PHOTOS...</p>
     </div>
 
-    <div id="photoGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+    <div id="photoGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
       <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
         <div class="h-48 bg-red-950/40 flex items-center justify-center"><span class="text-5xl">🔴</span></div>
         <div class="p-4 space-y-2">
-          <p class="mono text-red-400 text-sm font-bold">📷 FHAZ</p>
-          <p class="mono text-gray-500 text-sm">Sol 1000 · 2015-05-30</p>
+          <p class="mono text-red-400 text-sm font-bold">📷 FRONT</p>
+          <p class="mono text-gray-500 text-sm">Sol 4521 · 2026-01-15</p>
           <button class="w-full bg-white/5 hover:bg-red-900/30 border border-white/10 text-gray-300 mono text-sm py-2 rounded-lg transition-all">⭐ Save Photo</button>
         </div>
       </div>
       <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
         <div class="h-48 bg-red-950/40 flex items-center justify-center"><span class="text-5xl">🔴</span></div>
         <div class="p-4 space-y-2">
-          <p class="mono text-red-400 text-sm font-bold">📷 RHAZ</p>
-          <p class="mono text-gray-500 text-sm">Sol 1000 · 2015-05-30</p>
+          <p class="mono text-red-400 text-sm font-bold">📷 REAR</p>
+          <p class="mono text-gray-500 text-sm">Sol 3890 · 2025-11-08</p>
           <button class="w-full bg-white/5 hover:bg-red-900/30 border border-white/10 text-gray-300 mono text-sm py-2 rounded-lg transition-all">⭐ Save Photo</button>
         </div>
       </div>
       <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
         <div class="h-48 bg-red-950/40 flex items-center justify-center"><span class="text-5xl">🔴</span></div>
         <div class="p-4 space-y-2">
-          <p class="mono text-red-400 text-sm font-bold">📷 NAVCAM</p>
-          <p class="mono text-gray-500 text-sm">Sol 1000 · 2015-05-30</p>
+          <p class="mono text-red-400 text-sm font-bold">📷 NAVIGATION CAMERA</p>
+          <p class="mono text-gray-500 text-sm">Sol 4780 · 2026-03-21</p>
+          <button class="w-full bg-white/5 hover:bg-red-900/30 border border-white/10 text-gray-300 mono text-sm py-2 rounded-lg transition-all">⭐ Save Photo</button>
+        </div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+        <div class="h-48 bg-red-950/40 flex items-center justify-center"><span class="text-5xl">🔴</span></div>
+        <div class="p-4 space-y-2">
+          <p class="mono text-red-400 text-sm font-bold">📷 MAST CAMERA</p>
+          <p class="mono text-gray-500 text-sm">Sol 5001 · 2026-05-01</p>
           <button class="w-full bg-white/5 hover:bg-red-900/30 border border-white/10 text-gray-300 mono text-sm py-2 rounded-lg transition-all">⭐ Save Photo</button>
         </div>
       </div>
     </div>
 
     <div class="mt-8 text-center">
-      <button id="loadMoreBtn" class="bg-red-900/40 hover:bg-red-800/60 border border-red-700/50 text-red-300 mono text-sm tracking-widest px-8 py-3 rounded-full transition-all">
+      <button id="loadMoreBtn" class="bg-gray-900/40 hover:bg-gray-800/60 border border-gray-700/50 text-gray-300 mono text-sm tracking-widest px-8 py-3 rounded-full transition-all">
         LOAD MORE PHOTOS →
       </button>
     </div>
