@@ -49,8 +49,8 @@
       <div class="flex justify-between items-start mb-6">
         <div>
           <p class="mono text-orange-400 text-sm tracking-widest mb-2">CURRENT SOL</p>
-          <p id="solNumber" class="mono text-6xl font-bold text-white leading-none">1105</p>
-          <p id="earthDate" class="mono text-gray-500 text-sm mt-3">Earth Date: Nov 7, 2023</p>
+          <p id="solNumber" class="mono text-6xl font-bold text-white leading-none">1200</p>
+          <p id="earthDate" class="mono text-gray-500 text-sm mt-3">Earth Date: May 8, 2026</p>
         </div>
         <div class="text-right">
           <p id="weatherIcon" class="text-5xl">🌪️</p>
@@ -60,11 +60,11 @@
       <div class="grid grid-cols-2 gap-4 mb-6">
         <div class="bg-orange-900/20 border border-orange-700/30 rounded-xl p-5 text-center">
           <p class="mono text-orange-400 text-sm tracking-wider mb-2">MAX TEMP</p>
-          <p id="maxTemp" class="mono text-3xl font-bold text-orange-200">-20°C</p>
+          <p id="maxTemp" class="mono text-3xl font-bold text-orange-200">☀️45°C</p>
         </div>
         <div class="bg-blue-900/20 border border-blue-700/30 rounded-xl p-5 text-center">
           <p class="mono text-blue-400 text-sm tracking-wider mb-2">MIN TEMP</p>
-          <p id="minTemp" class="mono text-3xl font-bold text-blue-200">-73°C</p>
+          <p id="minTemp" class="mono text-3xl font-bold text-blue-200">❄️0°C</p>
         </div>
       </div>
       <div class="grid grid-cols-3 gap-3 border-t border-white/10 pt-5">
@@ -87,7 +87,7 @@
     <div id="forecastStrip" class="grid grid-cols-5 gap-3">
       <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
         <p class="mono text-gray-500 text-xs">Sol 1106</p>
-        <p class="text-2xl my-2">☀️</p>
+        <p class="text-2xl my-2">❄️</p>
         <p class="mono text-orange-200 text-sm font-bold">-18°</p>
         <p class="mono text-blue-300 text-xs">-70°</p>
       </div>
@@ -99,8 +99,8 @@
       </div>
       <div class="bg-blue-950/30 border border-blue-600/50 rounded-xl p-3 text-center">
         <p class="mono text-gray-500 text-xs">Sol 1108</p>
-        <p class="text-2xl my-2">❄️</p>
-        <p class="mono text-orange-200 text-sm font-bold">-30°</p>
+        <p class="text-2xl my-2">☀️</p>
+        <p class="mono text-orange-200 text-sm font-bold">30°</p>
         <p class="mono text-blue-300 text-xs font-bold">-90°</p>
       </div>
       <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
@@ -119,11 +119,11 @@
   </main>
   <script>
     const marsWeatherData = [
-      { sol:1105, earthDate:"2023-11-07", maxTemp:-20, minTemp:-73, windSpeed:7.1,  windDir:"SSW", pressure:718 },
-      { sol:1106, earthDate:"2023-11-08", maxTemp:-18, minTemp:-70, windSpeed:5.4,  windDir:"NW",  pressure:722 },
-      { sol:1107, earthDate:"2023-11-09", maxTemp:-22, minTemp:-75, windSpeed:9.2,  windDir:"SE",  pressure:715 },
-      { sol:1108, earthDate:"2023-11-10", maxTemp:-30, minTemp:-90, windSpeed:12.0, windDir:"N",   pressure:700 },
-      { sol:1109, earthDate:"2023-11-11", maxTemp:-15, minTemp:-68, windSpeed:4.8,  windDir:"SW",  pressure:725 },
+      { sol:1200, earthDate:"2023-11-07", maxTemp:-10, minTemp:-73, windSpeed:7.1,  windDir:"SSW", pressure:718 },
+      { sol:1201, earthDate:"2024-11-08", maxTemp: 25, minTemp:-70, windSpeed:5.4,  windDir:"NW",  pressure:722 },
+      { sol:1202, earthDate:"2025-11-09", maxTemp: 22, minTemp:-75, windSpeed:9.2,  windDir:"SE",  pressure:715 },
+      { sol:1203, earthDate:"2020-11-10", maxTemp:-30, minTemp:-90, windSpeed:12.0, windDir:"N",   pressure:700 },
+      { sol:1204, earthDate:"2022-11-11", maxTemp:-15, minTemp:-68, windSpeed:4.8,  windDir:"SW",  pressure:725 },
     ]
   </script>
 </body>
