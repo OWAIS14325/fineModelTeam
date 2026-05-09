@@ -114,14 +114,14 @@
       </div>
 
       <div class="px-8 py-6 border-t border-white/10 space-y-3">
-        <button id="editBtn"
+        <button id="editBtn" onclick="showForm()"
           class="w-full bg-teal-700 hover:bg-purple-600 active:scale-95 transition-all text-white mono text-sm tracking-widest py-3 rounded-xl font-bold">
           ✏️ EDIT PROFILE
         </button>
         <div id="editForm" class="hidden space-y-3">
           <input id="nameInput" type="text" placeholder="Enter your astronaut name..."
             class="w-full bg-white/5 border border-white/10 focus:border-purple-500 text-white rounded-xl px-4 py-3 text-base transition-colors" />
-          <button id="saveBtn"
+          <button id="saveBtn" onclick="saveName()"
             class="w-full bg-green-700 hover:bg-green-600 active:scale-95 transition-all text-white mono text-sm tracking-widest py-3 rounded-xl font-bold">
             💾 SAVE NAME
           </button>
@@ -130,6 +130,22 @@
     </div>
   </main>
   <script>
+
+    function showForm() {
+      document.getElementById("editForm").classList.remove("hidden");
+    }
+
+    function saveName() {
+
+      let newName = document.getElementById("nameInput").value;
+
+      document.getElementById("profileName").innerText = newName;
+
+      document.getElementById("avatarCircle").innerText =
+        newName.charAt(0).toUpperCase();
+
+      document.getElementById("editForm").classList.add("hidden");
+    }
     // localStorage key: "userProfile"  → { astronautName, joinedDate }
     // localStorage key: "favourites"   → array of saved items
     // localStorage key: "discoveryLog" → array of notes
