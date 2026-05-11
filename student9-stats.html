@@ -145,6 +145,54 @@
   </main>
   <script>
     // Reads from: "favourites" and "discoveryLog" in localStorage
+    const favourites = [
+      { type: "apod", title: "Pillars of Creation" },
+      { type: "mars", title: "FHAZ · Sol 1000" },
+      { type: "asteroid", title: "(2026 AB3)" },
+      { type: "apod", title: "Crab Nebula" },
+    ]
+    const discoveryLog = [
+      { text: "Saw the ISS today!" },
+      { text: "Checked the asteroid tracker." },
+    ]
+    const totalSaves = favourites.length
+    const totalNotes = discoveryLog.length
+    const apodSaves = favourites.filter(item => item.type === "apod")
+    const marsSaves = favourites.filter(item => item.type === "mars")
+
+    console.log(totalSaves)
+    console.log(totalNotes)
+    console.log(apodSaves.length)
+    console.log(marsSaves.length)
+
+    document.getElementById("totalSaves").textContent = totalSaves
+
+    document.getElementById("totalNotes").textContent = totalNotes
+
+    document.getElementById("apodSaves").textContent = apodSaves.length
+
+    document.getElementById("marsSaves").textContent = marsSaves.length
+
+    if (totalSaves >= 10) {
+      document.getElementById("rankEmoji").textContent = "⭐"
+      document.getElementById("rankTitle").textContent = "Commander"
+      document.getElementById("rankSubtitle").textContent = "You have saved 10+ cosmic discoveries!"
+
+    } else if (totalSaves >= 5) {
+      document.getElementById("rankEmoji").textContent = "🌙"
+      document.getElementById("rankTitle").textContent = "Astronaut"
+      document.getElementById("rankSubtitle").textContent = "You have saved 5 discoveries!"
+
+    } else if (totalSaves >= 1) {
+      document.getElementById("rankEmoji").textContent = "🚀"
+      document.getElementById("rankTitle").textContent = "Explorer"
+      document.getElementById("rankSubtitle").textContent = "You have saved 4 discoveries!"
+
+    } else {
+      document.getElementById("rankEmoji").textContent = "🌱"
+      document.getElementById("rankTitle").textContent = "Cadet"
+      document.getElementById("rankSubtitle").textContent = "No discoveries saved yet!"
+    }
   </script>
 </body>
 
