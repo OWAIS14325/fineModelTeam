@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CosmosHub — Mission Stats</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Syne', sans-serif;
+      background: #05050f;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .mono {
+      font-family: 'Space Mono', monospace;
+    }
+
+    .star-bg {
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 85%, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen star-bg text-white">
+  <nav class="border-b border-white/10 bg-black/40 backdrop-blur-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <a href="student1-profile.html" class="mono text-purple-400 font-bold tracking-widest text-sm shrink-0">🚀
+        COSMOSHUB</a>
+      <div class="flex items-center gap-1 overflow-x-auto ml-4">
+        <a href="student1-profile.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">👤
+          Profile</a>
+        <a href="student2-apod.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">🌌
+          APOD</a>
+        <a href="student3-mars.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">🔴
+          Mars</a>
+        <a href="student4-asteroids.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">☄️
+          Asteroids</a>
+        <a href="student5-iss.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">🛸
+          ISS</a>
+        <a href="student6-favourites.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">⭐
+          Favourites</a>
+        <a href="student7-log.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">📅
+          Log</a>
+        <a href="student8-weather.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">🌡️
+          Weather</a>
+        <a href="student9-stats.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border whitespace-nowrap transition-all font-bold"
+          style="background:rgba(244,114,182,0.15); color:#f472b6; border-color:rgba(244,114,182,0.4);">📊 Stats</a>
+        <a href="student10-search.html"
+          class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all">🔍
+          Search</a>
+      </div>
+    </div>
+  </nav>
+  <main class="max-w-2xl mx-auto px-4 py-12">
+    <div class="mb-8">
+      <p class="mono text-pink-400 text-xs tracking-widest mb-2">STUDENT 9 · localStorage</p>
+      <h1 class="text-3xl font-extrabold tracking-tight">Mission Stats</h1>
+    </div>
+
+    <div
+      class="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 border border-cyan-700/40 rounded-2xl p-6 text-center mb-6">
+      <p class="mono text-pink-400 text-sm tracking-widest mb-3">YOUR SPACE RANK</p>
+      <p id="rankEmoji" class="text-5xl mb-3">🚀</p>
+      <h2 id="rankTitle" class="text-2xl font-bold text-white">Explorer</h2>
+      <p id="rankSubtitle" class="mono text-cyan-300/70 text-sm mt-2">You have saved 12 cosmic discoveries!</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <div class="bg-white/5 border border-pink-900/40 rounded-xl p-5 text-center">
+        <p id="totalSaves" class="mono text-3xl font-bold text-pink-400">12</p>
+        <p class="mono text-gray-500 text-base mt-2">Total Saves</p>
+      </div>
+      <div class="bg-white/5 border border-cyan-900/40 rounded-xl p-5 text-center">
+        <p id="totalNotes" class="mono text-3xl font-bold text-cyan-400">28</p>
+        <p class="mono text-gray-500 text-base mt-2">Discovery Notes</p>
+      </div>
+      <div class="bg-white/5 border border-blue-900/40 rounded-xl p-5 text-center">
+        <p id="apodSaves" class="mono text-3xl font-bold text-blue-400">7</p>
+        <p class="mono text-gray-500 text-base mt-2">🌌 APOD Saves</p>
+      </div>
+      <div class="bg-white/5 border border-red-900/40 rounded-xl p-5 text-center">
+        <p id="marsSaves" class="mono text-3xl font-bold text-red-400">5</p>
+        <p class="mono text-gray-500 text-base mt-2">🔴 Mars Saves</p>
+      </div>
+    </div>
+
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 mb-6">
+      <p class="mono text-gray-500 text-sm tracking-widest mb-4">🕐 MOST RECENTLY SAVED</p>
+      <div id="recentSave" class="flex items-center gap-4">
+        <div
+          class="w-16 h-16 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-2xl shrink-0">
+          ⭐</div>
+        <div>
+          <p class="font-bold text-white text-base">Mars Dust Storm Snapshot</p>
+          <p class="mono text-gray-500 text-sm mt-1">Saved from the NASA APOD collection.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+      <p class="mono text-gray-500 text-sm tracking-widest mb-4">🏅 RANK LEVELS</p>
+      <div class="space-y-3">
+        <div class="flex justify-between items-center py-2 border-b border-white/5">
+          <span class="mono text-gray-500 text-sm">0 saves</span>
+          <span class="text-base font-bold text-gray-400">🌱 Cadet</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-white/5">
+          <span class="mono text-gray-500 text-sm">1–4 saves</span>
+          <span class="text-base font-bold text-blue-400">🚀 Explorer</span>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-white/5">
+          <span class="mono text-gray-500 text-sm">5–9 saves</span>
+          <span class="text-base font-bold text-purple-400">🌙 Astronaut</span>
+        </div>
+        <div class="flex justify-between items-center py-2">
+          <span class="mono text-gray-500 text-sm">10+ saves</span>
+          <span class="text-base font-bold text-yellow-400">⭐ Commander</span>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    // Reads from: "favourites" and "discoveryLog" in localStorage
+    const favourites = [
+      { type: "apod", title: "Pillars of Creation" },
+      { type: "mars", title: "FHAZ · Sol 1000" },
+      { type: "asteroid", title: "(2026 AB3)" },
+      { type: "apod", title: "Crab Nebula" },
+    ]
+    const discoveryLog = [
+      { text: "Saw the ISS today!" },
+      { text: "Checked the asteroid tracker." },
+    ]
+    const totalSaves = favourites.length
+    const totalNotes = discoveryLog.length
+    const apodSaves = favourites.filter(item => item.type === "apod")
+    const marsSaves = favourites.filter(item => item.type === "mars")
+
+    console.log(totalSaves)
+    console.log(totalNotes)
+    console.log(apodSaves.length)
+    console.log(marsSaves.length)
+
+    document.getElementById("totalSaves").textContent = totalSaves
+
+    document.getElementById("totalNotes").textContent = totalNotes
+
+    document.getElementById("apodSaves").textContent = apodSaves.length
+
+    document.getElementById("marsSaves").textContent = marsSaves.length
+
+    if (totalSaves >= 10) {
+      document.getElementById("rankEmoji").textContent = "⭐"
+      document.getElementById("rankTitle").textContent = "Commander"
+      document.getElementById("rankSubtitle").textContent = "You have saved 10+ cosmic discoveries!"
+
+    } else if (totalSaves >= 5) {
+      document.getElementById("rankEmoji").textContent = "🌙"
+      document.getElementById("rankTitle").textContent = "Astronaut"
+      document.getElementById("rankSubtitle").textContent = "You have saved 5 discoveries!"
+
+    } else if (totalSaves >= 1) {
+      document.getElementById("rankEmoji").textContent = "🚀"
+      document.getElementById("rankTitle").textContent = "Explorer"
+      document.getElementById("rankSubtitle").textContent = "You have saved 4 discoveries!"
+
+    } else {
+      document.getElementById("rankEmoji").textContent = "🌱"
+      document.getElementById("rankTitle").textContent = "Cadet"
+      document.getElementById("rankSubtitle").textContent = "No discoveries saved yet!"
+    }
+  </script>
+</body>
+
+</html>

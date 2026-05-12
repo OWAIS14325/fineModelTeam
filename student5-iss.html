@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CosmosHub — ISS Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Syne', sans-serif; background: #05050f; font-size: 16px; line-height: 1.7; }
+    .mono { font-family: 'Space Mono', monospace; }
+    .star-bg {
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 85%, rgba(255,255,255,0.2) 0%, transparent 100%);
+    }
+    input:focus, textarea:focus { outline: none; }
+    .blink{animation:blink 1.2s ease-in-out infinite;} @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+  </style>
+</head>
+<body class="min-h-screen star-bg text-white">
+  <nav class="border-b border-white/10 bg-black/40 backdrop-blur-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <a href="student1-profile.html" class="mono text-purple-400 font-bold tracking-widest text-sm shrink-0">🚀 COSMOSHUB</a>
+      <div class="flex items-center gap-1 overflow-x-auto ml-4">
+        <a href="student1-profile.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >👤 Profile</a>
+        <a href="student2-apod.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >🌌 APOD</a>
+        <a href="student3-mars.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >🔴 Mars</a>
+        <a href="student4-asteroids.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >☄️ Asteroids</a>
+        <a href="student5-iss.html" class="mono text-xs px-3 py-1.5 rounded-lg border whitespace-nowrap transition-all font-bold" style="background:rgba(52,211,153,0.15); color:#34d399; border-color:rgba(52,211,153,0.4);">🛸 ISS</a>
+        <a href="student6-favourites.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >⭐ Favourites</a>
+        <a href="student7-log.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >📅 Log</a>
+        <a href="student8-weather.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >🌡️ Weather</a>
+        <a href="student9-stats.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >📊 Stats</a>
+        <a href="student10-search.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >🔍 Search</a>
+      </div>
+    </div>
+  </nav>
+  <main class="max-w-xl mx-auto px-4 py-12">
+    <div class="mb-8">
+      <p class="mono text-green-400 text-xs tracking-widest mb-2">STUDENT 5 · LIVE API · NO KEY NEEDED</p>
+      <h1 class="text-3xl font-extrabold tracking-tight">ISS Live Tracker</h1>
+    </div>
+
+    <div class="bg-white/5 border border-green-700/40 rounded-2xl p-8 mb-5">
+      <div class="flex items-center gap-2 mb-6">
+        <span class="w-3 h-3 rounded-full bg-green-400 blink"></span>
+        <span class="mono text-green-400 text-sm tracking-widest">LIVE TRACKING</span>
+      </div>
+      <div class="grid grid-cols-2 gap-6 mb-6">
+        <div>
+          <p class="mono text-gray-500 text-sm tracking-widest mb-2">LATITUDE</p>
+          <p id="latitude" class="mono text-3xl font-bold text-green-300">37.0000</p>
+        </div>
+        <div>
+          <p class="mono text-gray-500 text-sm tracking-widest mb-2">LONGITUDE</p>
+          <p id="longitude" class="mono text-3xl font-bold text-green-300">-122.0000</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-3 border-t border-white/10 pt-5 mb-6">
+        <div class="text-center">
+          <p class="mono text-gray-500 text-sm">ALTITUDE</p>
+          <p id="altitude" class="mono text-white font-bold text-base mt-2">100 km</p>
+        </div>
+        <div class="text-center">
+          <p class="mono text-gray-500 text-sm">VELOCITY</p>
+          <p id="velocity" class="mono text-white font-bold text-base mt-2">50 km/h</p>
+        </div>
+        <div class="text-center">
+          <p class="mono text-gray-500 text-sm">UPDATED</p>
+          <p id="lastUpdate" class="mono text-white font-bold text-base mt-2">—</p>
+        </div>
+      </div>
+      <button id="refreshBtn" class="w-full bg-red-800/60 hover:bg-blue-700/70 border border-green-600/40 text-green-300 mono text-sm tracking-widest py-3 rounded-xl transition-all active:scale-95 font-bold">
+        🔄 REFRESH POSITION
+      </button>
+      <div class="flex items-center justify-center gap-3 mt-4">
+        <span class="mono text-gray-500 text-sm">Auto-refresh every 10s</span>
+        <button id="autoBtn" class="mono text-sm bg-white/5 border border-white/10 text-gray-400 px-4 py-1.5 rounded-full transition-all hover:border-green-600/40">OFF</button>
+      </div>
+    </div>
+
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+      <p class="mono text-gray-500 text-sm tracking-widest mb-4">📍 LAST POSITION</p>
+      <div id="historyList" class="space-y-3">
+        <div class="flex justify-between text-sm border-b border-white/5 pb-3">
+          <span class="mono text-gray-600">[12:45:32]  28.61°N, 77.20°E<p>You are curretnly over Indian Ocean</p></span>
+          <!-- <span class="mono text-gray-500">waiting for first fetch...</span> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 mt-3">
+      <p class="mono text-gray-500 text-sm tracking-widest mb-4">📍 LAST 2nd POSITIONS</p>
+      <div id="historyList" class="space-y-3">
+        <div class="flex justify-between text-sm border-b border-white/5 pb-3">
+          <span class="mono text-gray-600">[12:45:32]  28.61°N, 77.20°E</span>
+          <!-- <span class="mono text-gray-500">waiting for first fetch...</span> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 mt-3">
+      <p class="mono text-gray-500 text-sm tracking-widest mb-4">📍 LAST 3rd POSITIONS</p>
+      <div id="historyList" class="space-y-3">
+        <div class="flex justify-between text-sm border-b border-white/5 pb-3">
+          <span class="mono text-gray-600">[12:45:32]  28.61°N, 77.20°E</span>
+          <!-- <span class="mono text-gray-500">waiting for first fetch...</span> -->
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    // API: https://api.wheretheiss.at/v1/satellites/25544
+    // Returns: { latitude, longitude, altitude, velocity, timestamp }
+    let autoInterval = null
+    const positionHistory = []
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CosmosHub — Mars Rover Photos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Syne', sans-serif; background: #05050f; font-size: 16px; line-height: 1.7; }
+    .mono { font-family: 'Space Mono', monospace; }
+    .star-bg {
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 85%, rgba(255,255,255,0.2) 0%, transparent 100%);
+    }
+    input:focus, textarea:focus { outline: none; }
+    .spin{animation:spin 1s linear infinite;} @keyframes spin{to{transform:rotate(360deg);}} .filter-active{background:rgba(248,113,113,0.2);color:#f87171;border-color:rgba(248,113,113,0.5);}
+  </style>
+</head>
+<body class="min-h-screen star-bg text-white">
+  <nav class="border-b border-white/10 bg-black/40 backdrop-blur-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+      <a href="student1-profile.html" class="mono text-purple-400 font-bold tracking-widest text-sm shrink-0">🚀 COSMOSHUB</a>
+      <div class="flex items-center gap-1 overflow-x-auto ml-4">
+        <a href="student1-profile.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >👤 Profile</a>
+        <a href="student2-apod.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >🌌 APOD</a>
+        <a href="student3-mars.html" class="mono text-xs px-3 py-1.5 rounded-lg border whitespace-nowrap transition-all font-bold" style="background:rgba(248,113,113,0.15); color:#f87171; border-color:rgba(248,113,113,0.4);">🔴 Mars</a>
+        <a href="student4-asteroids.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >☄️ Asteroids</a>
+        <a href="student5-iss.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >🛸 ISS</a>
+        <a href="student6-favourites.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >⭐ Favourites</a>
+        <a href="student7-log.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >📅 Log</a>
+        <a href="student8-weather.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >🌡️ Weather</a>
+        <a href="student9-stats.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >📊 Stats</a>
+        <a href="student10-search.html" class="mono text-xs px-3 py-1.5 rounded-lg border border-transparent text-gray-400 hover:text-white whitespace-nowrap transition-all" >🔍 Search</a>
+      </div>
+    </div>
+  </nav>
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <div class="mb-8">
+      <p class="mono text-red-400 text-xs tracking-widest mb-2">STUDENT 3 · NASA MARS API</p>
+      <h1 class="text-3xl font-extrabold tracking-tight">Mars Rover Photos</h1>
+      <p class="text-gray-400 text-base mt-2">Exploring the mysterious red planet through rover cameras</p>
+    </div>
+
+    <div class="flex gap-2 flex-wrap mb-6">
+      <button data-camera="ALL"    class="filter-active mono text-sm px-4 py-2 rounded-full border transition-all">ALL</button>
+      <button data-camera="FHAZ"   class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">FRONT</button>
+      <button data-camera="RHAZ"   class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">REAR</button>
+      <button data-camera="NAVCAM" class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">NAVCAM</button>
+      <button data-camera="MAST"   class="mono text-sm px-4 py-2 rounded-full border border-white/10 text-gray-400 hover:text-white transition-all">MAST</button>
+    </div>
+
+    <div id="loadingSpinner" class="hidden flex-col items-center justify-center py-24 gap-4">
+      <div class="w-10 h-10 rounded-full border-4 border-red-500 border-t-transparent spin"></div>
+      <p class="mono text-sm text-red-400 tracking-widest">LOADING MARS PHOTOS...</p>
+    </div>
+
+    <div id="photoGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+          </div>
+<script>
+  const photos = [
+   {
+      cameraName: "Front Camera",
+      sol: 4521,
+      earthDate: "2026-01-15",
+      imgUrl: "🌕"
+    },
+
+    {
+      cameraName: "Rear Camera",
+      sol: 3890,
+      earthDate: "2025-11-08",
+      imgUrl: "☄️"
+    },
+
+    {
+      cameraName: "Navigation Camera",
+      sol: 4780,
+      earthDate: "2026-03-21",
+      imgUrl: "🌍"
+    },
+    {
+    cameraName: "Mast Camera",
+    sol: 5001,
+    earthDate: "2026-05-01",
+    imgUrl: "🪐"
+  }
+    
+  ]
+  console.log(photos)
+
+    const photoGrid = document.getElementById("photoGrid")
+    const cards = photos.map((photo) => {
+    return `
+      <div class="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+
+        <div class="h-48 bg-red-950/40 flex items-center justify-center">
+          <span class="text-5xl">${photo.imgUrl}</span>
+        </div>
+
+        <div class="p-4 space-y-2">
+
+          <p class="mono text-red-400 text-sm font-bold">
+            📷 ${photo.cameraName}
+          </p>
+
+          <p class="mono text-gray-500 text-sm">
+            Sol ${photo.sol} · ${photo.earthDate}
+          </p>
+
+          <button class="w-full bg-white/5 hover:bg-red-900/30 border border-white/10 text-gray-300 mono text-sm py-2 rounded-lg transition-all">
+            ⭐ Save Photo
+          </button>
+
+        </div>
+      </div>
+    `
+  })
+
+  photoGrid.innerHTML = cards.join("")
+
+</script>
+
+    <div class="mt-8 text-center">
+      <button id="loadMoreBtn" class="bg-gray-900/40 hover:bg-gray-800/60 border border-gray-700/50 text-gray-300 mono text-sm tracking-widest px-8 py-3 rounded-full transition-all">
+        LOAD MORE PHOTOS →
+      </button>
+    </div>
+  </main>
+  <script>
+    const NASA_KEY = "DEMO_KEY"
+    // API: https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY
+    // Returns: { photos: [ { img_src, camera: { name }, earth_date, sol } ] }
+    let allPhotos = []
+    let visibleCount = 9
+  </script>
+</body>
+</html>
