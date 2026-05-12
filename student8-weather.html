@@ -125,6 +125,44 @@
       { sol:1203, earthDate:"2020-11-10", maxTemp:-30, minTemp:-90, windSpeed:12.0, windDir:"N",   pressure:700 },
       { sol:1204, earthDate:"2022-11-11", maxTemp:-15, minTemp:-68, windSpeed:4.8,  windDir:"SW",  pressure:725 },
     ]
+
+    console.log(marsWeatherData[0]);
+
+    document.getElementById("solNumber").innerText = marsWeatherData[0].sol;
+
+document.getElementById("earthDate").innerText =
+  "Earth Date: " + marsWeatherData[0].earthDate;
+
+document.getElementById("maxTemp").innerText =
+  marsWeatherData[0].maxTemp + "°C";
+
+document.getElementById("minTemp").innerText =
+  marsWeatherData[0].minTemp + "°C";
+
+document.getElementById("windSpeed").innerText =
+  marsWeatherData[0].windSpeed + " m/s";
+
+document.getElementById("windDir").innerText =
+  marsWeatherData[0].windDir;
+
+document.getElementById("pressure").innerText =
+  marsWeatherData[0].pressure + " Pa";
+
+  document.getElementById("pressure").innerText =
+  marsWeatherData[0].pressure + " Pa";
+
+if (marsWeatherData[0].maxTemp > -20) {
+  document.getElementById("weatherIcon").innerText = "☀️";
+  document.getElementById("weatherLabel").innerText = "SUNNY & HOT";
+}
+else if (marsWeatherData[0].maxTemp < -25) {
+  document.getElementById("weatherIcon").innerText = "❄️";
+  document.getElementById("weatherLabel").innerText = "SNOWY & COLD";
+}
+else {
+  document.getElementById("weatherIcon").innerText = "🌪️";
+  document.getElementById("weatherLabel").innerText = "DUSTY & POLLUTED";
+}
   </script>
 </body>
 </html>
