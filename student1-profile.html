@@ -129,7 +129,18 @@
       </div>
     </div>
   </main>
-  <script>
+    <script>
+    function renderName(){
+      let savedName = localStorage.getItem("userName")
+      if(savedName){
+        document.getElementById("profileName").innerText = savedName;
+
+      document.getElementById("avatarCircle").innerText =
+      savedName.charAt(0).toUpperCase();
+      }
+     
+      
+    }
 
     function showForm() {
       document.getElementById("editForm").classList.remove("hidden");
@@ -139,16 +150,17 @@
 
       let newName = document.getElementById("nameInput").value;
 
-      document.getElementById("profileName").innerText = newName;
-
-      document.getElementById("avatarCircle").innerText =
-        newName.charAt(0).toUpperCase();
-
+     localStorage.setItem("userName", newName)
+     
+      renderName() // when updating the name
       document.getElementById("editForm").classList.add("hidden");
     }
     // localStorage key: "userProfile"  → { astronautName, joinedDate }
     // localStorage key: "favourites"   → array of saved items
     // localStorage key: "discoveryLog" → array of notes
+
+    renderName() // Page Load
+
   </script>
 </body>
 
