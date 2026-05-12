@@ -111,9 +111,12 @@
             Sol ${photo.sol} · ${photo.earthDate}
           </p>
 
-          <button class="w-full bg-white/5 hover:bg-red-900/30 border border-white/10 text-gray-300 mono text-sm py-2 rounded-lg transition-all">
-            ⭐ Save Photo
-          </button>
+         <button
+  onclick="savePhoto('${photo.imgUrl}', '${photo.cameraName}', '${photo.sol}', this)"
+  class="w-full bg-white/5 hover:bg-red-900/30 border border-white/10 text-gray-300 mono text-sm py-2 rounded-lg transition-all"
+>
+  ⭐ Save Photo
+</button>
 
         </div>
       </div>
@@ -121,6 +124,30 @@
   })
 
   photoGrid.innerHTML = cards.join("")
+
+  function savePhoto(imgUrl, cameraName, sol, button) {
+
+  const favourites =
+    JSON.parse(localStorage.getItem("favourites")) || []
+
+  const newItem = {
+    id: Date.now(),
+    type: "mars",
+    imageUrl: imgUrl,
+    title: cameraName,
+    sol: sol,
+    savedAt: new Date().toISOString()
+  }
+
+  favourites.push(newItem)
+
+  localStorage.setItem(
+    "favourites",
+    JSON.stringify(favourites)
+  )
+
+  button.textContent = "✓ Saved"
+}
 
 </script>
 
