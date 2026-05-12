@@ -47,7 +47,7 @@
 
     <div id="closestBox" class="bg-yellow-900/20 border border-yellow-600/40 rounded-2xl p-5 mb-6">
       <p class="mono text-yellow-400 text-xs tracking-widest mb-2">⚡ CLOSEST APPROACH THIS WEEK</p>
-      <h2 id="closestName" class="text-xl font-bold text-white">2k26 Zypher Approaching Earth on coming Tuesday. </h2>
+      <h2 id="closestName" class="text-xl font-bold text-white">2k26 Zypher Approaching Earth Today. </h2>
       <p id="closestDetail" class="text-yellow-200/70 text-base mt-1">—</p>
     </div>
 
@@ -56,50 +56,7 @@
       <p class="mono text-sm text-yellow-400 tracking-widest">SCANNING FOR ASTEROIDS...</p>
     </div>
 
-    <div id="asteroidList" class="space-y-3">
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex justify-between items-center gap-4">
-        <div class="space-y-1">
-          <h3 class="font-bold text-white text-base">☄️ (2k26 Zypher)</h3>
-          <p class="mono text-gray-400 text-sm">Approach: May 12, 2026</p>
-          <p class="mono text-gray-400 text-sm">Distance: 550,000 km</p>
-          <p class="mono text-gray-400 text-sm">Diameter: ~0.8 km</p>
-        </div>
-        <span class="shrink-0 mono text-sm bg-green-900/50 text-green-300 border border-green-700/50 px-3 py-1.5 rounded-full">✅ SAFE</span>
-      </div>
-      <div class="bg-red-950/30 border border-red-700/50 rounded-2xl p-5 flex justify-between items-center gap-4">
-        <div class="space-y-1">
-          <h3 class="font-bold text-white text-base">☄️ (2k26 Zenion)</h3>
-          <p class="mono text-gray-400 text-sm">Approach: May 20, 2026</p>
-          <p class="mono text-gray-400 text-sm">Distance: 2,550,000 km</p>
-          <p class="mono text-gray-400 text-sm">Diameter: ~0.9 km</p>
-        </div>
-        <span class="shrink-0 mono text-sm bg-green-900/50 text-green-300 border border-green-700/50 px-3 py-1.5 rounded-full">✅ SAFE</span>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex justify-between items-center gap-4">
-        <div class="space-y-1">
-          <h3 class="font-bold text-white text-base">☄️ (2k25 Qnion)</h3>
-          <p class="mono text-gray-400 text-sm">Approach: May 11, 2026</p>
-          <p class="mono text-gray-400 text-sm">Distance: 5,900,000 km</p>
-          <p class="mono text-gray-400 text-sm">Diameter: ~0.05 km</p>
-        </div>
-        <span class="shrink-0 mono text-sm bg-green-900/50 text-green-300 border border-green-700/50 px-3 py-1.5 rounded-full">✅ SAFE</span>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-3 gap-4 mt-6">
-      <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-        <p id="totalCount" class="mono text-2xl font-bold text-yellow-400">3</p>
-        <p class="mono text-gray-500 text-sm mt-1">Total</p>
-      </div>
-      <div class="bg-white/5 border border-red-900/30 rounded-xl p-4 text-center">
-        <p id="dangerCount" class="mono text-2xl font-bold text-red-400">0</p>
-        <p class="mono text-gray-500 text-sm mt-1">Dangerous</p>
-      </div>
-      <div class="bg-white/5 border border-green-900/30 rounded-xl p-4 text-center">
-        <p id="safeCount" class="mono text-2xl font-bold text-green-400">3</p>
-        <p class="mono text-gray-500 text-sm mt-1">Safe</p>
-      </div>
-    </div>
+    <div id="asteroidList" class="space-y-3"></div>
   </main>
   <script>
     const NASA_KEY = "DEMO_KEY"
@@ -107,6 +64,115 @@
     const nextWeek = new Date(Date.now() + 7*24*60*60*1000).toISOString().split("T")[0]
     // API: https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${nextWeek}&api_key=${NASA_KEY}
     // Flatten: const all = Object.values(data.near_earth_objects).flat()
+     const asteroids = [
+    {
+      name: "2k26 Zypher",
+      date: "May 12, 2026",
+      distance: "550,000 km",
+      distanceNumber: 550000,
+      diameter: "0.8 km",
+      isDangerous: false
+    },
+    {
+      name: "2k26 Zenion",
+      date: "May 20, 2026",
+      distance: "2,550,000 km",
+      distanceNumber: 2550000,
+      diameter: "0.9 km",
+      isDangerous: true
+    },
+    {
+      name: "2k25 Qnion",
+      date: "May 11, 2026",
+      distance: "5,900,000 km",
+      distanceNumber: 5900000,
+      diameter: "0.05 km",
+      isDangerous: false
+    }
+  ];
+   let closestAsteroid = asteroids.find(function(asteroid) {
+
+  return asteroid.distanceNumber === 550000
+
+})
+document.getElementById("closestName").innerText =
+  closestAsteroid.name + " is the closest asteroid this week"
+
+document.getElementById("closestDetail").innerText =
+  "Distance: " + closestAsteroid.distance
+  
+  const asteroidList = document.getElementById("asteroidList")
+
+  let asteroidCards = asteroids.map(function(asteroid) {
+
+    let badge = ""
+
+    if (asteroid.isDangerous === true) {
+      badge = `
+        <span class="shrink-0 mono text-sm bg-red-900/50 text-red-300 border border-red-700/50 px-3 py-1.5 rounded-full">
+          ⚠️ DANGEROUS
+        </span>
+      `
+    } else {
+      badge = `
+        <span class="shrink-0 mono text-sm bg-green-900/50 text-green-300 border border-green-700/50 px-3 py-1.5 rounded-full">
+          ✅ SAFE
+        </span>
+      `
+    }
+let cardBorder = ""
+
+if (asteroid.isDangerous === true) {
+  cardBorder = "border-red-700/50"
+} else {
+  cardBorder = "border-white/10"
+}
+    return `
+      <div class="bg-white/5 border ${cardBorder} rounded-2xl p-5 flex justify-between items-center gap-4">
+        <div class="space-y-1">
+          <h3 class="font-bold text-white text-base">☄️ (${asteroid.name})</h3>
+          <p class="mono text-gray-400 text-sm">Approach: ${asteroid.date}</p>
+          <p class="mono text-gray-400 text-sm">Distance: ${asteroid.distance}</p>
+          <p class="mono text-gray-400 text-sm">Diameter: ~${asteroid.diameter}</p>
+          <button 
+  onclick="saveAsteroid('${asteroid.name}')"
+  class="mt-2 mono text-xs bg-yellow-500/20 border border-yellow-500/40 text-yellow-300 px-3 py-1 rounded-lg"
+>
+  ⭐ Save
+</button>
+        </div>
+
+        ${badge}
+      </div>
+    `
+  })
+
+  asteroidList.innerHTML = asteroidCards.join("")
+
+  const dangerousAsteroids = asteroids.filter(function(asteroid) {
+    return asteroid.isDangerous === true
+  })
+
+  const safeAsteroids = asteroids.filter(function(asteroid) {
+    return asteroid.isDangerous === false
+  })
+
+  document.getElementById("totalCount").innerText = asteroids.length
+  document.getElementById("dangerCount").innerText = dangerousAsteroids.length
+  document.getElementById("safeCount").innerText = safeAsteroids.length
+  function saveAsteroid(name) {
+
+  let favourites = JSON.parse(localStorage.getItem("favourites")) || []
+
+  favourites.push({
+    type: "asteroid",
+    name: name
+  })
+
+  localStorage.setItem("favourites", JSON.stringify(favourites))
+
+  alert(name + " saved to favourites!")
+}
   </script>
 </body>
 </html>
