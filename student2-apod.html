@@ -1,11 +1,9 @@
-<!-- 
- 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Space APOD Card</title>
 
@@ -21,16 +19,10 @@
     <!-- Image -->
     <div class="relative">
 
-      <img
-        id="apodImage"
-        class="w-full h-72 object-cover"
-      />
+      <img id="apodImage" class="w-full h-72 object-cover" />
 
       <!-- Date Badge -->
-      <span
-        id="apodDate"
-        class="absolute top-3 left-3 bg-black/70 text-blue-300 text-xs px-3 py-1 rounded-full"
-      >
+      <span id="apodDate" class="absolute top-3 left-3 bg-black/70 text-blue-300 text-xs px-3 py-1 rounded-full">
       </span>
 
     </div>
@@ -39,25 +31,16 @@
     <div class="p-5">
 
       <!-- Title -->
-      <h1
-        id="apodTitle"
-        class="text-2xl font-bold text-white mb-3"
-      >
+      <h1 id="apodTitle" class="text-2xl font-bold text-white mb-3">
       </h1>
 
       <!-- Description -->
-      <p
-        id="apodDescription"
-        class="text-gray-300 text-sm leading-6"
-      >
+      <p id="apodDescription" class="text-gray-300 text-sm leading-6">
       </p>
 
       <!-- Save Button -->
-      <button
-        id="saveBtn"
-        onclick="savePhoto()"
-        class="mt-5 bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-lg"
-      >
+      <button id="saveBtn" onclick="savePhoto()"
+        class="mt-5 bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-2 rounded-lg">
         Save Photo
       </button>
 
@@ -102,13 +85,40 @@
     // 3 & 4. Button click function
     function savePhoto() {
 
+      let newItem = {
+
+        id: Date.now(),
+
+        type: "image",
+
+        title: apodData.title,
+
+        imageUrl: apodData.imageUrl,
+
+        savedAt: new Date()
+      }
+
+      let favourites =
+        JSON.parse(localStorage.getItem("favourites")) || []
+
+      console.log(favourites)
+
+      favourites.push(newItem)
+
+      localStorage.setItem(
+        "favourites",
+        JSON.stringify(favourites)
+      )
+
       document.getElementById("saveBtn").innerHTML =
         "✓ Already Saved"
 
+      document.getElementById("saveBtn").setAttribute('disabled', 'true')
+      document.getElementById('saveBtn').classList.remove('hover:bg-indigo-600')
     }
 
   </script>
 
 </body>
 
-</html>-->
+</html>
