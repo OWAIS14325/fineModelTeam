@@ -85,35 +85,6 @@
 
     <p class="mono text-gray-500 text-sm tracking-widest mb-4 text-center">📆 5-SOL FORECAST</p>
     <div id="forecastStrip" class="grid grid-cols-5 gap-3">
-      <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
-        <p class="mono text-gray-500 text-xs">Sol 1106</p>
-        <p class="text-2xl my-2">❄️</p>
-        <p class="mono text-orange-200 text-sm font-bold">-18°</p>
-        <p class="mono text-blue-300 text-xs">-70°</p>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
-        <p class="mono text-gray-500 text-xs">Sol 1107</p>
-        <p class="text-2xl my-2">🌪️</p>
-        <p class="mono text-orange-200 text-sm font-bold">-22°</p>
-        <p class="mono text-blue-300 text-xs">-75°</p>
-      </div>
-      <div class="bg-blue-950/30 border border-blue-600/50 rounded-xl p-3 text-center">
-        <p class="mono text-gray-500 text-xs">Sol 1108</p>
-        <p class="text-2xl my-2">☀️</p>
-        <p class="mono text-orange-200 text-sm font-bold">30°</p>
-        <p class="mono text-blue-300 text-xs font-bold">-90°</p>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
-        <p class="mono text-gray-500 text-xs">Sol 1109</p>
-        <p class="text-2xl my-2">☀️</p>
-        <p class="mono text-orange-200 text-sm font-bold">-15°</p>
-        <p class="mono text-blue-300 text-xs">-68°</p>
-      </div>
-      <div class="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
-        <p class="mono text-gray-500 text-xs">Sol 1110</p>
-        <p class="text-2xl my-2">🌪️</p>
-        <p class="mono text-orange-200 text-sm font-bold">-19°</p>
-        <p class="mono text-blue-300 text-xs">-72°</p>
       </div>
     </div>
   </main>
@@ -127,6 +98,38 @@
     ]
 
     console.log(marsWeatherData[0]);
+    
+    const coldestSol = marsWeatherData.find((weather) =>
+  weather.minTemp === -90
+);
+  
+    const forecastHTML = marsWeatherData.map((weather) => {
+
+  let weatherEmoji = "🌪️";
+
+  const coldestClass =
+  weather.sol === coldestSol.sol
+    ? "border-2 border-blue-500 bg-blue-950/30"
+    : "border border-white/10";
+
+  if (weather.maxTemp > -20) {
+    weatherEmoji = "☀️";
+  }
+  else if (weather.maxTemp < -25) {
+    weatherEmoji = "❄️";
+  }
+
+  return `
+    <div class="bg-white/5 ${coldestClass} rounded-xl p-3 text-center">
+      <p class="mono text-gray-500 text-xs">Sol ${weather.sol}</p>
+      <p class="text-2xl my-2">${weatherEmoji}</p>
+      <p class="mono text-orange-200 text-sm font-bold">${weather.maxTemp}°</p>
+      <p class="mono text-blue-300 text-xs">${weather.minTemp}°</p>
+    </div>
+  `;
+}).join("");
+
+document.getElementById("forecastStrip").innerHTML = forecastHTML;
 
     document.getElementById("solNumber").innerText = marsWeatherData[0].sol;
 
