@@ -110,47 +110,55 @@
 
   </main>
   <script>
-    // localStorage key: "discoveryLog"
-    // Each entry: { id: Date.now(), text: "...", createdAt: new Date().toISOString() }
+    const STORAGE_KEY = 'discoveryLog'
 
-    const entries = [
-      { id: 431441, text: "Abdullah Frontend Developer ", date: "09-05-2026" },
-      { id: 433300, text: "Zubair Frontend Developer", date: "09-05-2026" },
-      { id: 431651, text: "Sohail Fullstack Developer ", date: "09-05-2026" }
+    function getLogEntries(){
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+    }
 
-    ]
+    function saveLogEntries(entries){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries))
+    }
 
-    const html = entries.map((en) => {
-
-
-      return `<div class="relative">
-        <div class="absolute -left-4 top-5 w-3 h-3 rounded-full bg-cyan-500 border-2 border-gray-900"></div>
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
-          <div class="flex justify-between items-start mb-3">
-            <span class="mono text-cyan-400 text-sm">🗓${en.date}</span>
-            <button class="mono text-sm text-red-400 hover:text-red-300 transition-colors">✕ Delete</button>
+    function renderLog(){
+      const entries = getLogEntries()
+      const html = entries.map((entry) => {
+        return `<div class="relative">
+          <div class="absolute -left-4 top-5 w-3 h-3 rounded-full bg-cyan-500 border-2 border-gray-900"></div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <div class="flex justify-between items-start mb-3">
+              <span class="mono text-cyan-400 text-sm">🗓${new Date(entry.createdAt).toLocaleDateString()}</span>
+            </div>
+            <p class="text-base text-gray-300 leading-relaxed">${entry.text}</p>
           </div>
-          <p class="text-base text-gray-300 leading-relaxed">${en.text}</p>
-        </div>
-      </div> `
-      
+        </div>`
       })
-
-      
-    document.getElementById('logList').innerHTML = html.join('')
+      document.getElementById('logList').innerHTML = html.join('')
+    }
 
     function saveNote(){
-      let textarea = document.getElementById('noteInput').value
-      if(textarea==""){
-        alert('Please enter something')
-      }else{
-        console.log(textarea);
-      }
-      
-      
+      const textarea = document.getElementById('noteInput')
+      const text = textarea.value.trim()
 
-     
+      if (!text) {
+        alert('Please enter something')
+        return
+      }
+
+      const entries = getLogEntries()
+      const newEntry = {
+        id: Date.now(),
+        text,
+        createdAt: new Date().toISOString()
+      }
+
+      entries.push(newEntry)
+      saveLogEntries(entries)
+      textarea.value = ''
+      renderLog()
     }
+
+    renderLog()
   </script>
 </body>
 
